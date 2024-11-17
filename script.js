@@ -8,27 +8,30 @@ return {
 }
 }
 
-//player one object 
-function playerOne(nameOne) {
-    //player One marker
-    const markerOne = "X"
-
-    return {nameOne,markerOne}
+//player object
+function player(name, marker) {
+ 
+    return {name,marker}
 
 }
 
-//instantiate playerOne object
-const Mark = playerOne("Mark Csernus");
+//Instantiate player Mark
+const Mark = player("Mark", "X")
 
-function playerTwo(nameTwo) {
-    //player Two marker 
-    const markerTwo = "O"
+console.log(Mark.marker)
 
-    return {nameTwo, markerTwo}
+//instantiate player David 
+const David = player("David Smith", "O")
+
+console.log(David.marker)
+
+//objection 
+function gamePlay (playerMarker, squareNumber) {
+console.log(`Mark's marker is ${Mark.marker}`)
+console.log(`David's marker is ${David.marker}`)
+let squares = gameBoard();
+console.log(squares.board[6])
 }
 
-//instantiate playerTwo object
-const David = playerTwo("David Smith")
-
-console.log(David.markerTwo)
+gamePlay(Mark, David)
 
