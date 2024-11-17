@@ -9,15 +9,26 @@ return {
 }
 
 //player one object 
-function playerOne(name) {
+function playerOne(nameOne) {
     //player One marker
     const markerOne = "X"
 
-    return {name, markerOne}
+    return {nameOne,markerOne}
 
 }
 
- const Mark = playerOne("Mark Csernus");
+//instantiate playerOne object
+const Mark = playerOne("Mark Csernus");
 
+function playerTwo(nameTwo) {
+    //player Two marker 
+    const markerTwo = "O"
 
+    return {nameTwo, markerTwo}
+}
+
+//instantiate playerTwo object
+const David = playerTwo("David Smith")
+
+console.log(David.markerTwo)
 
