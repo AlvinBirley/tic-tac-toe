@@ -1,3 +1,7 @@
+//select square divs
+const divs = document.querySelectorAll('.square');
+
+
 function gameBoard() {
     return {
         board: [null, null, null, null, null, null, null, null, null]
@@ -47,14 +51,20 @@ function checkDraw() {
 }
 
 function gamePlay(playerMarker, squareNumber) {
+    divs.forEach(div => {
+        if (parseInt(div.dataset.value) === squareNumber) {
+          div.innerHTML = playerMarker.marker; 
+        }
+      });
+
+
     if (gameOver) {
         console.log("Game over. No more moves can be made.");
         return;  // Stop if the game is already over
     }
 
     staticBoard[squareNumber - 1] = playerMarker.marker;
-    console.log(staticBoard);
-
+  
     const winner = checkWinner();  // Check if there's a winner after the move
 
     if (winner) {
@@ -66,9 +76,9 @@ function gamePlay(playerMarker, squareNumber) {
     } 
 }
 
-gamePlay(Mark, 6)
+gamePlay(Mark, 4)
+gamePlay(David, 1)
 gamePlay(Mark, 7)
 gamePlay(Mark, 8)
 gamePlay(Mark, 9)
-console.log(staticBoard)
 
