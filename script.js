@@ -53,13 +53,12 @@ function checkDraw() {
 function gamePlay(playerMarker, squareNumber) {
     divs.forEach(div => {
         if (parseInt(div.dataset.value) === squareNumber) {
-          div.innerHTML = playerMarker.marker; 
+            div.innerHTML = playerMarker.marker;
         }
-      });
-
+    });
 
     if (gameOver) {
-        console.log("Game over. No more moves can be made.");
+        alert("Game over. No more moves can be made.");
         return;  // Stop if the game is already over
     }
 
@@ -68,17 +67,61 @@ function gamePlay(playerMarker, squareNumber) {
     const winner = checkWinner();  // Check if there's a winner after the move
 
     if (winner) {
-        console.log(`${winner === "X" ? Mark.name : David.name} wins!`);
+        // Delay the alert until after the board update
+        setTimeout(() => {
+            alert(`${winner === "X" ? Mark.name : David.name} wins!`);
+        }, 100);  // Delay by 100ms to allow the DOM update to render
         gameOver = true;  // Mark the game as over
     } else if (checkDraw()) {
-        console.log("It's a draw!");
+        alert("It's a draw!");
         gameOver = true;  // Mark the game as over in case of a draw
     } 
 }
 
-gamePlay(Mark, 4)
-gamePlay(David, 1)
-gamePlay(Mark, 7)
-gamePlay(Mark, 8)
-gamePlay(Mark, 9)
+
+//Function to return the data-value of number divs when clicked
+function getNumValue(event){
+    const dataValue = event.currentTarget.dataset.value;
+    return dataValue
+}
+
+//Event listener that console logs the data-values of number divs 
+divs.forEach(div => {
+    div.addEventListener('click', (event) => {
+        if(div.innerHTML!="") {
+            return;
+        }
+        if (gameOver) {
+            return;
+        }
+        const numVal = getNumValue(event);
+        xCount=0
+        oCount=0
+        for (let i = 0; i < divs.length; i++) {
+            const childDiv = divs[i];
+           if (childDiv.innerHTML===Mark.marker) {
+            xCount ++
+           }
+           else if (childDiv.innerHTML===David.marker) {
+            oCount ++
+           }
+        }
+
+        if (xCount+oCount===0) {
+            gamePlay(Mark, parseInt(numVal))
+            console.log(xCount, oCount)
+        }
+        else if ((xCount+oCount)%2!=0){
+            gamePlay(David, parseInt(numVal))
+            console.log(xCount, oCount)
+        }
+        else if (xCount===oCount) {
+            gamePlay(Mark, parseInt(numVal))
+            console.log(xCount, oCount)
+        }
+        xCount=0
+        oCount=0
+    });
+});
+
 
